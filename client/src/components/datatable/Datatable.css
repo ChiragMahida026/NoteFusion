@@ -1,0 +1,105 @@
+:root {
+  --gray: #34495e;
+  --darkgray: #2c3e50;
+}
+
+select {
+  /* Reset Select */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 13em;
+  height: 3em;
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  /* background-color: #34495e; */
+  transition: 0.25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+.button12 {
+  background: #fff;
+  color: gray;
+  font: bold 11px "Helvetica";
+  padding: 12px;
+  text-decoration: none;
+
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.button12:after {
+  background: gray;
+  color: #fff;
+  content: ">";
+  display: inline-block;
+  font: bold 11px "Georgia";
+  height: 25px;
+  line-height: 25px;
+  margin-left: 10px;
+  text-align: center;
+  width: 25px;
+
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+.button12:hover {
+  -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 15px rgba(1, 0, 0, 0);
+
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+/* .button12.cancel-btn:hover {
+  background-color: #f3270b;
+  box-shadow: 0px 15px 20px rgba(243, 42, 11, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+} */
+
+/* .button12.accept-btn:hover {
+  background-color: #0b91f3;
+  color: #fff;
+} */

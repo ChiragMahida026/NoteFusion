@@ -1,0 +1,3 @@
+apps:
+  - name: "NoteFusion"
+    script: "npm run dev"
