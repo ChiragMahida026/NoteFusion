@@ -6,7 +6,7 @@ const connectDB = require("./config/db");
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const http = require('http');
-const cors = require("cors"); // import cors package
+const cors = require("cors"); 
 
 
 connectDB();
@@ -38,7 +38,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Node JS API PROJECT for mongodb',
+      title: 'NodeFusion API Documentation',
       version: '1.0.0'
     },
     servers: [{
@@ -156,16 +156,32 @@ app.get('/', (req, res) => {
 app.use("/users", userRouter);
 
 
-//Project
+//get the notes
 /**
  * @swagger
- * /api/notes/project:
+ * /api/notes:
  *   get:
  *     summary: Get the all project name 
+ *     parameters:
+ *      - name: "service_id"
+ *        in: "query"
+ *        description: "service id"
+ *        required: true
+ *        type: "string"
+ *      - name: "project_name"
+ *        in: "query"
+ *        description: "Project Name"
+ *        required: true
+ *        type: "string"
+ *      - name: "environment_type"
+ *        in: "query"
+ *        description: "Environment Type"
+ *        required: true
+ *        type: "string"
  *     security:
  *       - BearerAuth: []
  *     tags: 
- *       - verify
+ *       - Notes
  *     responses:
  *       200:
  *         description: Returns all project name 
@@ -182,6 +198,166 @@ app.use("/users", userRouter);
  *         x-tokenPrefix: Bearer
  *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
  */
+
+/**
+ * @swagger
+ * /api/notes:
+ *   post:
+ *     summary: Add a new note
+ *     description: Create a new note with details about a project's service
+ *     tags: 
+ *       - Notes
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               Command:
+ *                 type: string
+ *                 description: The command used to start the service.
+ *                 example: pm2/nohup
+ *               Port:
+ *                 type: string
+ *                 description: The port number on which the service is running.
+ *                 example: 3008
+ *               Type:
+ *                 type: string
+ *                 description: The type of the service.
+ *                 example: Node
+ *               environment:
+ *                 type: string
+ *                 description: The environment in which the service is running.
+ *                 example: nut-dev, devint
+ *               environment_type:
+ *                 type: string
+ *                 description: The type of environment in which the service is running.
+ *                 example: dev
+ *               project_id:
+ *                 type: string
+ *                 description: The ID of the project to which the service belongs.
+ *                 example: 63e477418ac7508eaf6c469d
+ *               project_name:
+ *                 type: string
+ *                 description: The name of the project to which the service belongs.
+ *                 example: Pure
+ *               service_id:
+ *                 type: string
+ *                 description: The ID of the service.
+ *                 example: 63dca09e50666ad59ffeaa0b
+ *               servicename:
+ *                 type: string
+ *                 description: The name of the service.
+ *                 example: qwerty
+ *     responses:
+ *       '200':
+ *         description: A JSON object containing the ID of the created note.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   description: The ID of the created note.
+ *                   example: 1234567890abcdefg
+ *       '401':
+ *         description: Invalid credentials.
+ */
+
+/**
+ * @swagger
+ * /api/notes/63e5e5a30aeb1bf541c0ddee:
+ *   get:
+ *     summary: Get the all project name 
+ *     security:
+ *       - BearerAuth: []
+ *     tags: 
+ *       - Notes
+ *     responses:
+ *       200:
+ *         description: Returns all project name 
+ *       401:
+ *         description: Unauthorized
+ *     securityDefinitions:
+ *       BearerAuth:
+ *         type: apiKey
+ *         name: Authorization
+ *         in: header
+ *         description: The JWT token, in the format 'Bearer &lt;token&gt;'
+ *         value: Bearer {token}
+ *         x-tokenName: Authorization
+ *         x-tokenPrefix: Bearer
+ *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
+ */
+
+
+
+//Project get
+/**
+ * @swagger
+ * /api/notes/project:
+ *   get:
+ *     summary: Get the all project name 
+ *     security:
+ *       - BearerAuth: []
+ *     tags: 
+ *       - Project
+ *     responses:
+ *       200:
+ *         description: Returns all project name 
+ *       401:
+ *         description: Unauthorized
+ *     securityDefinitions:
+ *       BearerAuth:
+ *         type: apiKey
+ *         name: Authorization
+ *         in: header
+ *         description: The JWT token, in the format 'Bearer &lt;token&gt;'
+ *         value: Bearer {token}
+ *         x-tokenName: Authorization
+ *         x-tokenPrefix: Bearer
+ *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
+ */
+
+//project post
+/**
+ * @swagger
+ * /api/notes/project:
+ *   post:
+ *     summary: Add a new note
+ *     description: Create a new note with details about a project's service
+ *     tags: 
+ *       - Project
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               project_name:
+ *                 type: string
+ *                 description: The command used to start the service.
+ *                 example: pure2
+ *     responses:
+ *       '200':
+ *         description: A JSON object containing the ID of the created note.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   description: The ID of the created note.
+ *                   example: 1234567890abcdefg
+ *       '401':
+ *         description: Invalid credentials.
+ */
+
+
 app.use("/api/notes", noteRouter);
 app.use(errorHandler);
 
@@ -199,5 +375,4 @@ const server = http.createServer(app);
 
 app.listen(PORT, () => {
   console.log("server is running");
-  // console.log(`Server is running on port ${PORT}`);
 });
