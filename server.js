@@ -268,16 +268,56 @@ app.use("/users", userRouter);
 
 /**
  * @swagger
- * /api/notes/63e5e5a30aeb1bf541c0ddee:
+ * /api/notes/{id}:
  *   get:
- *     summary: Get the all project name 
+ *     summary: Get all project names
  *     security:
  *       - BearerAuth: []
  *     tags: 
  *       - Notes
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID of the note to retrieve
+ *         required: true
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
- *         description: Returns all project name 
+ *         description: Returns all project names
+ *       401:
+ *         description: Unauthorized
+ *     securityDefinitions:
+ *       BearerAuth:
+ *         type: apiKey
+ *         name: Authorization
+ *         in: header
+ *         description: The JWT token, in the format 'Bearer &lt;token&gt;'
+ *         value: Bearer {token}
+ *         x-tokenName: Authorization
+ *         x-tokenPrefix: Bearer
+ *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
+ */
+
+/**
+ * @swagger
+ * /api/notes/{id}:
+ *   delete:
+ *     summary: Get all project names
+ *     security:
+ *       - BearerAuth: []
+ *     tags: 
+ *       - Notes
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID of the note to retrieve
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns all project names
  *       401:
  *         description: Unauthorized
  *     securityDefinitions:
