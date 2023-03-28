@@ -71,12 +71,14 @@ app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec))
  *   get:
  *     summary: Test GET method
  *     description: Test if the GET method is working.
+ *     tags: 
+ *       - Test
  *     responses:
  *       200:
  *         description: A simple message confirming that the GET method is working.
  */
 app.get('/', (req, res) => {
-  res.send('Welcome to the API!');
+  res.send('Welcome to the NoteFusion Api Documentation!');
 });
 
 
@@ -86,6 +88,8 @@ app.get('/', (req, res) => {
  *   post:
  *     summary: Login user
  *     description: Authenticate a user by their email and password.
+ *     tags: 
+ *       - Login
  *     requestBody:
  *       required: true
  *       content:
@@ -133,7 +137,7 @@ app.get('/', (req, res) => {
  *     security:
  *       - BearerAuth: []
  *     tags: 
- *       - verify
+ *       - Verify
  *     responses:
  *       200:
  *         description: Returns id and name of user
@@ -298,6 +302,85 @@ app.use("/users", userRouter);
  *         x-tokenPrefix: Bearer
  *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
  */
+/**
+ * @swagger
+ * /api/notes/{id}:
+ *   put:
+ *     summary: Update the name and project name of a note by ID
+ *     security:
+ *       - BearerAuth: []
+ *     tags:
+ *       - Notes
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID of the note to update
+ *         example: 64216d247fa6d674ab9ad579
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: note
+ *         in: body
+ *         description: Fields to update in the note
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+  *               Command:
+ *                 type: string
+ *                 description: The command used to start the service.
+ *                 example: pm2/nohup
+ *               Port:
+ *                 type: string
+ *                 description: The port number on which the service is running.
+ *                 example: 3008
+ *               Type:
+ *                 type: string
+ *                 description: The type of the service.
+ *                 example: Node
+ *               environment:
+ *                 type: string
+ *                 description: The environment in which the service is running.
+ *                 example: nut-dev, devint
+ *               environment_type:
+ *                 type: string
+ *                 description: The type of environment in which the service is running.
+ *                 example: dev
+ *               project_id:
+ *                 type: string
+ *                 description: The ID of the project to which the service belongs.
+ *                 example: 63e477418ac7508eaf6c469d
+ *               project_name:
+ *                 type: string
+ *                 description: The name of the project to which the service belongs.
+ *                 example: Pure
+ *               service_id:
+ *                 type: string
+ *                 description: The ID of the service.
+ *                 example: 63dca09e50666ad59ffeaa0b
+ *               servicename:
+ *                 type: string
+ *                 description: The name of the service.
+ *                 example: qwerty
+ *     responses:
+ *       200:
+ *         description: Note updated successfully
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Note not found
+ *     securityDefinitions:
+ *       BearerAuth:
+ *         type: apiKey
+ *         name: Authorization
+ *         in: header
+ *         description: The JWT token, in the format 'Bearer &lt;token&gt;'
+ *         value: Bearer {token}
+ *         x-tokenName: Authorization
+ *         x-tokenPrefix: Bearer
+ *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
+ */
+
 
 /**
  * @swagger
@@ -334,6 +417,8 @@ app.use("/users", userRouter);
 
 
 
+
+
 //Project get
 /**
  * @swagger
@@ -360,6 +445,9 @@ app.use("/users", userRouter);
  *         x-tokenPrefix: Bearer
  *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
  */
+
+
+
 
 //project post
 /**
