@@ -165,7 +165,7 @@ app.use("/users", userRouter);
  * @swagger
  * /api/notes:
  *   get:
- *     summary: Get the all project name 
+ *     summary: Get the particular service name with the use of service id,project name,environment type 
  *     parameters:
  *      - name: "service_id"
  *        in: "query"
@@ -207,7 +207,7 @@ app.use("/users", userRouter);
  * @swagger
  * /api/notes:
  *   post:
- *     summary: Add a new note
+ *     summary: Add a new service with assign the name of that project.
  *     description: Create a new note with details about a project's service
  *     tags: 
  *       - Notes
@@ -274,7 +274,7 @@ app.use("/users", userRouter);
  * @swagger
  * /api/notes/{id}:
  *   get:
- *     summary: Get all project names
+ *     summary: Get the service name by service id 
  *     security:
  *       - BearerAuth: []
  *     tags: 
@@ -302,6 +302,7 @@ app.use("/users", userRouter);
  *         x-tokenPrefix: Bearer
  *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
  */
+
 /**
  * @swagger
  * /api/notes/{id}:
@@ -326,7 +327,7 @@ app.use("/users", userRouter);
  *         schema:
  *           type: object
  *           properties:
-  *               Command:
+ *               Command:
  *                 type: string
  *                 description: The command used to start the service.
  *                 example: pm2/nohup
@@ -386,7 +387,7 @@ app.use("/users", userRouter);
  * @swagger
  * /api/notes/{id}:
  *   delete:
- *     summary: Get all project names
+ *     summary: delete the service name by the service id.
  *     security:
  *       - BearerAuth: []
  *     tags: 
@@ -424,7 +425,7 @@ app.use("/users", userRouter);
  * @swagger
  * /api/notes/project:
  *   get:
- *     summary: Get the all project name 
+ *     summary: Get the all project name
  *     security:
  *       - BearerAuth: []
  *     tags: 
@@ -454,7 +455,7 @@ app.use("/users", userRouter);
  * @swagger
  * /api/notes/project:
  *   post:
- *     summary: Add a new note
+ *     summary: Add a new project with the meaningful details 
  *     description: Create a new note with details about a project's service
  *     tags: 
  *       - Project
@@ -484,6 +485,89 @@ app.use("/users", userRouter);
  *       '401':
  *         description: Invalid credentials.
  */
+
+/**
+ * @swagger
+ * /api/notes/project/{id}:
+ *   put:
+ *     summary: Update the project name by project id
+ *     security:
+ *       - BearerAuth: []
+ *     tags:
+ *       - Project
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID of the note to update
+ *         example: 64217031bafac0d6bceb9dc3
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: note
+ *         in: body
+ *         description: Fields to update in the note
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *               project_name:
+ *                 type: string
+ *                 description: The name of the project to which the service belongs.
+ *                 example: Pure
+ *     responses:
+ *       200:
+ *         description: Note updated successfully
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Note not found
+ *     securityDefinitions:
+ *       BearerAuth:
+ *         type: apiKey
+ *         name: Authorization
+ *         in: header
+ *         description: The JWT token, in the format 'Bearer &lt;token&gt;'
+ *         value: Bearer {token}
+ *         x-tokenName: Authorization
+ *         x-tokenPrefix: Bearer
+ *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
+ */
+
+
+/**
+ * @swagger
+ * /api/notes/project/{id}:
+ *   delete:
+ *     summary: delete the project name by the project id.
+ *     security:
+ *       - BearerAuth: []
+ *     tags: 
+ *       - Project
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID of the note to retrieve
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns all project names
+ *       401:
+ *         description: Unauthorized
+ *     securityDefinitions:
+ *       BearerAuth:
+ *         type: apiKey
+ *         name: Authorization
+ *         in: header
+ *         description: The JWT token, in the format 'Bearer &lt;token&gt;'
+ *         value: Bearer {token}
+ *         x-tokenName: Authorization
+ *         x-tokenPrefix: Bearer
+ *         x-tokenDescription: Enter the token in the format 'Bearer &lt;token&gt;'
+ */
+
+
 
 
 app.use("/api/notes", noteRouter);

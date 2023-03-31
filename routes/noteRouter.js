@@ -12,11 +12,11 @@ router
 
 router
   .route("/project")
-  // .get(protect, noteCtrl.getNotes)
-  // .get(protect, noteCtrl.getNotes_dev)
-  // .post(protect, noteCtrl.createNote)
   .get(protect, noteCtrl.getProject)
   .post(protect, noteCtrl.createProject);
+
+  router.route("/project/:id")  .put(protect, noteCtrl.updateproject).delete(protect, noteCtrl.deleteproject);
+
 router
   .route("/:id")
   .get(protect, noteCtrl.getNote)

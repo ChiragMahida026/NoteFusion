@@ -76,6 +76,17 @@ const noteCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
+
+  deleteproject: async (req, res) => {
+    try {
+      await projectModel.findByIdAndDelete(req.params.id);
+      res.json({ msg: "Deleted a project" });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+
   updateNote: async (req, res) => {
     try {
       const {
@@ -104,6 +115,27 @@ const noteCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
+  
+  updateproject: async (req, res) => {
+    try {
+      const {
+       project_name
+      } = req.body;
+      await Notes.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          project_name
+        }
+      );
+      res.json({ msg: "Updated a project Name" });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+
+
+
   getNote: async (req, res) => {
     try {
       const note = await Notes.findById(req.params.id);
